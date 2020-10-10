@@ -303,6 +303,7 @@ docker exec -it dev_mongo ./usr/local/bin/initiate_replica.sh --dev
 ```
 Теперь можно установить необходимые зависимости и запустить тесты:
 ```
+export ENV_TYPE=dev
 make install
 make install-dev
 make test
