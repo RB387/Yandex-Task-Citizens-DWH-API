@@ -23,6 +23,7 @@ services:
       - prod_network
     volumes:
     - ./mongodb/data:/data/db
+    - ./mongodb/replica_set:/usr/local/bin
     restart: always
     entrypoint: [ "/usr/bin/mongod", "--port", "27017", "--bind_ip_all", "--replSet", "rs0"]
   dev_mongo:
@@ -34,6 +35,8 @@ services:
       - 10017:10017
     expose:
       - 10017
+    volumes:
+      - ./mongodb/replica_set:/usr/local/bin
     restart: always
     entrypoint: [ "/usr/bin/mongod", "--port", "10017", "--bind_ip_all", "--replSet", "dev-rs0"]
   director:
@@ -44,9 +47,8 @@ services:
     depends_on:
       - prod_mongo_node0
     volumes:
-      - ./mongodb:/usr/local/bin
-    entrypoint:
-      - /usr/local/bin/initiate_replica.sh
+      - ./mongodb/replica_set:/usr/local/bin
+    entrypoint: ["/usr/local/bin/initiate_replica.sh", "--all"]
 
 networks:
   prod_network:
