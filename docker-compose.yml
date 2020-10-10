@@ -1,0 +1,53 @@
+version: "3.4"
+
+services:
+  citizens_dwh_api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: citizens_dwh_api
+    ports:
+    - 8080:8080
+    networks:
+      - prod_network
+    environment:
+      - ENV_TYPE=prod
+      - PROD_MONGODB_URI=mongodb://mongo_node0:27017/?replicaSet=rs0
+    entrypoint: ["python", "-u", "main.py"]
+  prod_mongo_node0:
+    container_name: mongo_node0
+    image: mongo
+    ports:
+    - 27017:27017
+    networks:
+      - prod_network
+    volumes:
+    - ./mongodb/data:/data/db
+    restart: always
+    entrypoint: [ "/usr/bin/mongod", "--port", "27017", "--bind_ip_all", "--replSet", "rs0"]
+  dev_mongo:
+    container_name: dev_mongo
+    image: mongo
+    networks:
+      - dev_network
+    ports:
+      - 10017:10017
+    expose:
+      - 10017
+    restart: always
+    entrypoint: [ "/usr/bin/mongod", "--port", "10017", "--bind_ip_all", "--replSet", "dev-rs0"]
+  director:
+    image: mongo
+    networks:
+      - prod_network
+      - dev_network
+    depends_on:
+      - prod_mongo_node0
+    volumes:
+      - ./mongodb:/usr/local/bin
+    entrypoint:
+      - /usr/local/bin/initiate_replica.sh
+
+networks:
+  prod_network:
+  dev_network:
