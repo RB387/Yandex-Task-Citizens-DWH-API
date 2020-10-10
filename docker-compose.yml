@@ -33,8 +33,6 @@ services:
       - dev_network
     ports:
       - 10017:10017
-    expose:
-      - 10017
     volumes:
       - ./mongodb/replica_set:/usr/local/bin
     restart: always
