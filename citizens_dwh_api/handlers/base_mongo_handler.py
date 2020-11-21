@@ -6,7 +6,7 @@ from simio.handler.base import BaseHandler
 from citizens_dwh_api.dao.mongo.dao import MongoCitizensDao
 
 
-class DtoApiHandler(BaseHandler):
+class DaoApiHandler(BaseHandler):
     @property
     def dao(self):
         return MongoCitizensDao(

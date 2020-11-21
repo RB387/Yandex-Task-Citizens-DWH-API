@@ -4,13 +4,13 @@ import trafaret as t
 from aiohttp.web_response import Response
 from simio.handler.utils import route
 
-from citizens_dwh_api.handlers.base_mongo_handler import DtoApiHandler
+from citizens_dwh_api.handlers.base_mongo_handler import DaoApiHandler
 from citizens_dwh_api.handlers.utils import get_json_response
 from citizens_dwh_api.entities.schemas import Citizen
 
 
 @route(path="/imports")
-class ImportCitizensHandlerDto(DtoApiHandler):
+class ImportCitizensHandlerDao(DaoApiHandler):
     async def post(self, citizens: t.List(Citizen)) -> Response:
         import_id = str(uuid4())
 
