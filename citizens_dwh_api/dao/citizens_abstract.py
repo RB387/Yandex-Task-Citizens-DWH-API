@@ -5,7 +5,7 @@ from abc import ABC, abstractmethod
 from citizens_dwh_api.entities.schemas import Citizen, OptionalCitizen
 
 
-class AbstractCitizensDto(ABC):
+class AbstractCitizensDao(ABC):
     @abstractmethod
     async def insert_many(self, citizens: Iterable[Citizen]):
         ...

@@ -133,7 +133,7 @@ async def test_percentile_age_stat_handler(
         await cli.server.app[CLIENTS][AsyncIOMotorClient][TEST_DB_NAME][MONGO_COLLECTION_NAME].insert_many(
             mongo_data
         )
-    with patch('citizens_dwh_api.dto.mongo.percentile_aggregation.datetime') as mock:
+    with patch('citizens_dwh_api.dao.mongo.percentile_aggregation.datetime') as mock:
         mock.now.return_value = datetime(year=2020, month=10, day=11)
         resp = await cli.get(f"/imports/{import_id}/towns/stat/percentile/age")
 

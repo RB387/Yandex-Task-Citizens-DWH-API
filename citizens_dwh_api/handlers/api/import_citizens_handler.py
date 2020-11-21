@@ -17,5 +17,5 @@ class ImportCitizensHandlerDto(DtoApiHandler):
         for citizen in citizens:
             citizen["import_id"] = import_id
 
-        await self.dto.insert_many(citizens)
+        await self.dao.insert_many(citizens)
         return get_json_response({"import_id": import_id}, status=201)

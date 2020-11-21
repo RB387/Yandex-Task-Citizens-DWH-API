@@ -6,10 +6,10 @@ from motor.motor_asyncio import AsyncIOMotorClient
 from pymongo import ReturnDocument
 
 from citizens_dwh_api.constants import PERCENTILES
-from citizens_dwh_api.dto.citizens_abstract import AbstractCitizensDto
-from citizens_dwh_api.dto.exceptions import CitizenNotFound
-from citizens_dwh_api.dto.mongo.percentile_aggregation import PercentileAggregation
-from citizens_dwh_api.dto.mongo.presents_aggregation import PresentsAggregation
+from citizens_dwh_api.dao.citizens_abstract import AbstractCitizensDao
+from citizens_dwh_api.dao.exceptions import CitizenNotFound
+from citizens_dwh_api.dao.mongo.percentile_aggregation import PercentileAggregation
+from citizens_dwh_api.dao.mongo.presents_aggregation import PresentsAggregation
 from citizens_dwh_api.entities.schemas import Citizen, OptionalCitizen
 
 
@@ -18,7 +18,7 @@ class RelativeActions(Enum):
     REMOVE = "$pop"
 
 
-class MongoCitizensDto(AbstractCitizensDto):
+class MongoCitizensDao(AbstractCitizensDao):
     def __init__(self, mongo_client: AsyncIOMotorClient, db_name: str, collection_name: str):
         self.client = mongo_client
         self.db_name = db_name

@@ -8,6 +8,6 @@ from citizens_dwh_api.handlers.utils import get_json_response
 @route(path="/imports/{import_id}/towns/stat/percentile/age")
 class PercentileAgeStatHandlerDto(DtoApiHandler):
     async def get(self, import_id: str) -> web.Response:
-        percentile_stats = await self.dto.get_percentile_stats(import_id)
+        percentile_stats = await self.dao.get_percentile_stats(import_id)
 
         return get_json_response(percentile_stats)
