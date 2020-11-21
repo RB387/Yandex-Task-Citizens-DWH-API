@@ -1,0 +1,6 @@
+class DtoException(Exception):
+    ...
+
+
+class CitizenNotFound(DtoException):
+    ...

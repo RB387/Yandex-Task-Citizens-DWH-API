@@ -2,9 +2,11 @@ import json
 from datetime import datetime
 
 import pytest
+from simio.app.config_names import CLIENTS
+from motor.motor_asyncio import AsyncIOMotorClient
 
 from citizens_dwh_api.constants import MONGO_COLLECTION_NAME
-from lib.clients.mongo_client import MongoClient
+from tests.conftest import TEST_DB_NAME
 
 
 @pytest.mark.parametrize(
@@ -128,7 +130,7 @@ async def test_citizen_handler(
     expected_status,
 ):
     if mongo_data:
-        await cli.server.app[MongoClient.NAME][MONGO_COLLECTION_NAME].insert_many(
+        await cli.server.app[CLIENTS][AsyncIOMotorClient][TEST_DB_NAME][MONGO_COLLECTION_NAME].insert_many(
             mongo_data
         )
 
@@ -139,7 +141,7 @@ async def test_citizen_handler(
     assert resp.status == expected_status
     assert json.loads(await resp.text()) == expected_response
 
-    cursor = cli.server.app[MongoClient.NAME][MONGO_COLLECTION_NAME].find(
+    cursor = cli.server.app[CLIENTS][AsyncIOMotorClient][TEST_DB_NAME][MONGO_COLLECTION_NAME].find(
         {}, {"_id": 0}
     )
     patched_mongo_data = [citizen async for citizen in cursor]

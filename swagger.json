@@ -1,0 +1,208 @@
+{
+    "info": {
+        "title": "citizens_dwh_api",
+        "version": "0.1.0"
+    },
+    "paths": {
+        "/imports": {
+            "post": {
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "citizens",
+                        "schema": {
+                            "properties": {
+                                "properties": {
+                                    "apartment": {
+                                        "type": "integer"
+                                    },
+                                    "birth_date": {
+                                        "type": "string"
+                                    },
+                                    "building": {
+                                        "type": "string"
+                                    },
+                                    "citizen_id": {
+                                        "type": "integer"
+                                    },
+                                    "gender": {
+                                        "type": "string"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "relatives": {
+                                        "items": {
+                                            "items": {
+                                                "type": "integer"
+                                            },
+                                            "type": "array"
+                                        },
+                                        "type": "array"
+                                    },
+                                    "street": {
+                                        "type": "string"
+                                    },
+                                    "town": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "type": "object"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful request"
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    }
+                },
+                "tags": [
+                    "import_citizens_handler_dto"
+                ]
+            }
+        },
+        "/imports/{import_id}/citizens": {
+            "get": {
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "import_id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful request"
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    }
+                },
+                "tags": [
+                    "citizens_handler_dto"
+                ]
+            }
+        },
+        "/imports/{import_id}/citizens/stat/birthdays": {
+            "get": {
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "import_id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful request"
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    }
+                },
+                "tags": [
+                    "citizens_presents_handler_dto"
+                ]
+            }
+        },
+        "/imports/{import_id}/citizens/{citizen_id}": {
+            "patch": {
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "new_citizen_fields",
+                        "schema": {
+                            "properties": {
+                                "apartment": {
+                                    "type": "integer"
+                                },
+                                "birth_date": {
+                                    "type": "string"
+                                },
+                                "building": {
+                                    "type": "string"
+                                },
+                                "gender": {
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "type": "string"
+                                },
+                                "relatives": {
+                                    "items": {
+                                        "items": {
+                                            "type": "integer"
+                                        },
+                                        "type": "array"
+                                    },
+                                    "type": "array"
+                                },
+                                "street": {
+                                    "type": "string"
+                                },
+                                "town": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "import_id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "citizen_id",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful request"
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    }
+                },
+                "tags": [
+                    "citizen_handler_dto"
+                ]
+            }
+        },
+        "/imports/{import_id}/towns/stat/percentile/age": {
+            "get": {
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "import_id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful request"
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    }
+                },
+                "tags": [
+                    "percentile_age_stat_handler_dto"
+                ]
+            }
+        }
+    },
+    "swagger": "2.0"
+}

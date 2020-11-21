@@ -19,4 +19,4 @@ else:
     raise ValueError(f"Found unexpected environment {ENV_TYPE}")
 
 if MONGODB_URI is None:
-    raise ValueError("Mongodburi wasn't provided")
+    raise ValueError("Mongodb uri wasn't provided")

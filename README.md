@@ -5,7 +5,7 @@
    * [1: POST /imports](#post-import)
    * [2: PATCH /imports/$import_id/citizens/$citizen_id](#patch-citizen)
    * [3: GET /imports/$import_id/citizens](#get-citizens)
-   * [4: GET /imports/$import_id/citizens/birthdays](#get-birthdays)
+   * [4: GET /imports/$import_id/citizens/stat/birthdays](#get-birthdays)
    * [5: GET /imports/$import_id/towns/stat/percentile/age](#get-percentile)
 * [Запуск приложения](#launch-app)
 * [Запуск тестов](#launch-tests)
@@ -216,7 +216,7 @@ relatives<sup>3</sup> | список из целых чисел | Ближайш
 		]
 	}
 
-### <a name="get-birthdays"></a> 4: GET /imports/$import_id/citizens/birthdays
+### <a name="get-birthdays"></a> 4: GET /imports/$import_id/citizens/stat/birthdays
 
 Возвращает жителей и количество подарков, которые они будут покупать своим ближайшим родственникам (1-го порядка), сгруппированных по месяцам из указанного набора данных.
 

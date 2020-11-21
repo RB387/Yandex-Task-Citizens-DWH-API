@@ -1,6 +1,6 @@
 from aiohttp import web
 
-from citizens_dwh_api.app_builder import AppBuilder
+from simio.app.builder import AppBuilder
 from citizens_dwh_api.config import get_config
 
 

@@ -1,9 +1,11 @@
 import json
 
 import pytest
+from motor.motor_asyncio import AsyncIOMotorClient
+from simio.app.config_names import CLIENTS
 
 from citizens_dwh_api.constants import MONGO_COLLECTION_NAME
-from lib.clients.mongo_client import MongoClient
+from tests.conftest import TEST_DB_NAME
 
 
 @pytest.mark.parametrize(
@@ -85,7 +87,7 @@ async def test_citizens_handler(
     cli, mongo_data, import_id, expected_response, expected_status
 ):
     if mongo_data:
-        await cli.server.app[MongoClient.NAME][MONGO_COLLECTION_NAME].insert_many(
+        await cli.server.app[CLIENTS][AsyncIOMotorClient][TEST_DB_NAME][MONGO_COLLECTION_NAME].insert_many(
             mongo_data
         )
 

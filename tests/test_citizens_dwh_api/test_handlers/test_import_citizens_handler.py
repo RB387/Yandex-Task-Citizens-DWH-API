@@ -1,8 +1,8 @@
 import json
-from unittest.mock import patch
 
 import pytest
 
+from citizens_dwh_api.handlers.api import import_citizens_handler
 from tests.conftest import patched_uuid
 
 
@@ -101,12 +101,10 @@ from tests.conftest import patched_uuid
 )
 @pytest.mark.asyncio
 async def test_import_citizens_handler(
-    cli, request_data, expected_response, expected_status
+    cli, request_data, expected_response, expected_status, monkeypatch
 ):
-    with patch(
-        "citizens_dwh_api.handlers.api.import_citizens_handler.uuid4", patched_uuid
-    ):
-        resp = await cli.post("/imports", data=json.dumps(request_data))
+    monkeypatch.setattr(import_citizens_handler, "uuid4", patched_uuid)
+    resp = await cli.post("/imports", data=json.dumps(request_data))
 
     assert resp.status == expected_status
     assert json.loads(await resp.text()) == expected_response
