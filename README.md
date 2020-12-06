@@ -295,13 +295,9 @@ docker-compose up
 # <a name="launch-app"></a> Запуск тестов
 Сначала необходимо поднять dev mongodb:
 ```
-docker-compose run -d --name dev_mongo dev_mongo
+make debug
 ```
-После чего настроить для нее replica set:
-```
-docker exec -it dev_mongo ./usr/local/bin/initiate_replica.sh --dev
-```
-Теперь можно установить необходимые зависимости и запустить тесты:
+После установить необходимые зависимости и запустить тесты:
 ```
 export ENV_TYPE=dev
 make install
