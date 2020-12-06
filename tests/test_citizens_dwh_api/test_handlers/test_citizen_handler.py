@@ -130,9 +130,9 @@ async def test_citizen_handler(
     expected_status,
 ):
     if mongo_data:
-        await cli.server.app[CLIENTS][AsyncIOMotorClient][TEST_DB_NAME][MONGO_COLLECTION_NAME].insert_many(
-            mongo_data
-        )
+        await cli.server.app[CLIENTS][AsyncIOMotorClient][TEST_DB_NAME][
+            MONGO_COLLECTION_NAME
+        ].insert_many(mongo_data)
 
     resp = await cli.patch(
         f"/imports/{import_id}/citizens/{citizen_id}", data=json.dumps(request_data)
@@ -141,9 +141,9 @@ async def test_citizen_handler(
     assert resp.status == expected_status
     assert json.loads(await resp.text()) == expected_response
 
-    cursor = cli.server.app[CLIENTS][AsyncIOMotorClient][TEST_DB_NAME][MONGO_COLLECTION_NAME].find(
-        {}, {"_id": 0}
-    )
+    cursor = cli.server.app[CLIENTS][AsyncIOMotorClient][TEST_DB_NAME][
+        MONGO_COLLECTION_NAME
+    ].find({}, {"_id": 0})
     patched_mongo_data = [citizen async for citizen in cursor]
 
     assert patched_mongo_data == expected_patched_mongo_data

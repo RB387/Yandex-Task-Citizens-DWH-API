@@ -1,10 +1,10 @@
 from pathlib import Path
 
 from simio.app.config_names import APP, CLIENTS, VARS
+from motor.motor_asyncio import AsyncIOMotorClient
 
 from citizens_dwh_api.environment import MONGODB_URI
 from citizens_dwh_api.constants import MONGO_DB_NAME, MONGO_COLLECTION_NAME
-from motor.motor_asyncio import AsyncIOMotorClient
 
 
 def get_config():

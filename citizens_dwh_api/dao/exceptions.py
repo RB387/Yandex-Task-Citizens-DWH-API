@@ -1,6 +1,6 @@
-class DtoException(Exception):
+class DaoException(Exception):
     ...
 
 
-class CitizenNotFound(DtoException):
+class CitizenNotFound(DaoException):
     ...

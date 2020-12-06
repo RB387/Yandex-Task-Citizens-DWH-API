@@ -7,7 +7,7 @@ from citizens_dwh_api.handlers.utils import get_json_response
 
 
 @route(path="/imports/{import_id}/citizens")
-class CitizensHandlerDao(DaoApiHandler):
+class CitizensHandler(DaoApiHandler):
     async def get(self, import_id: str) -> Response:
         raw_citizens = await self.dao.get_citizens_by_import_id(import_id)
 

@@ -2,6 +2,9 @@ import os
 
 from citizens_dwh_api.entities.env_type import EnvType
 
+HOST = os.getenv("HOST", "localhost")
+PORT = os.getenv("PORT", 8080)
+
 ENV_TYPE = EnvType(os.environ["ENV_TYPE"])
 PROD_MONGODB_URI = os.environ.get("PROD_MONGODB_URI")
 DEV_MONGODB_URI = os.environ.get(

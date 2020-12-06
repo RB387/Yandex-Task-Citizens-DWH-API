@@ -1,9 +1,7 @@
 lint:
 	black citizens_dwh_api && \
-	black lib && \
 	black tests && \
-	pylint citizens_dwh_api && \
-	pylint lib
+	pylint citizens_dwh_api
 
 test:
 	pytest -vv

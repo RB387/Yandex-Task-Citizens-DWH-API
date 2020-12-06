@@ -19,7 +19,9 @@ class AbstractCitizensDao(ABC):
         ...
 
     @abstractmethod
-    async def patch_citizen(self, new_citizen_fields: OptionalCitizen, import_id: str, citizen_id: int) -> Citizen:
+    async def patch_citizen(
+        self, new_citizen_fields: OptionalCitizen, import_id: str, citizen_id: int
+    ) -> Citizen:
         ...
 
     @abstractmethod

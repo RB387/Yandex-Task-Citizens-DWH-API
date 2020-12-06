@@ -174,9 +174,9 @@ async def test_citizens_presents_handler(
     cli, mongo_data, import_id, expected_response, expected_status
 ):
     if mongo_data:
-        await cli.server.app[CLIENTS][AsyncIOMotorClient][TEST_DB_NAME][MONGO_COLLECTION_NAME].insert_many(
-            mongo_data
-        )
+        await cli.server.app[CLIENTS][AsyncIOMotorClient][TEST_DB_NAME][
+            MONGO_COLLECTION_NAME
+        ].insert_many(mongo_data)
 
     resp = await cli.get(f"/imports/{import_id}/citizens/stat/birthdays")
 

@@ -7,12 +7,14 @@ from citizens_dwh_api.entities.schemas import OptionalCitizen
 
 
 @route(path="/imports/{import_id}/citizens/{citizen_id}")
-class CitizenHandlerDao(DaoApiHandler):
+class CitizenHandler(DaoApiHandler):
     async def patch(
         self, new_citizen_fields: OptionalCitizen, import_id: str, citizen_id: int
     ):
         try:
-            patched_citizen = await self.dao.patch_citizen(new_citizen_fields, import_id, citizen_id)
+            patched_citizen = await self.dao.patch_citizen(
+                new_citizen_fields, import_id, citizen_id
+            )
         except CitizenNotFound:
             raise get_bad_request_exception("Citizen not found")
 

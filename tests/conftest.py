@@ -40,9 +40,11 @@ def cli(config, loop, aiohttp_client):
     builder = AppBuilder(config)
     app = builder.build_app()
 
-    yield loop.run_until_complete(aiohttp_client(app))
+    yield loop.run_until_complete(aiohttp_client(app.app))
 
-    loop.run_until_complete(app[CLIENTS][AsyncIOMotorClient].drop_database(TEST_DB_NAME))
+    loop.run_until_complete(
+        app.app[CLIENTS][AsyncIOMotorClient].drop_database(TEST_DB_NAME)
+    )
 
 
 def patched_uuid():

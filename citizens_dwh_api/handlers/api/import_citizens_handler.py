@@ -10,7 +10,7 @@ from citizens_dwh_api.entities.schemas import Citizen
 
 
 @route(path="/imports")
-class ImportCitizensHandlerDao(DaoApiHandler):
+class ImportCitizensHandler(DaoApiHandler):
     async def post(self, citizens: t.List(Citizen)) -> Response:
         import_id = str(uuid4())
 

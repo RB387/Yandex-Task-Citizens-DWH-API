@@ -19,7 +19,9 @@ class RelativeActions(Enum):
 
 
 class MongoCitizensDao(AbstractCitizensDao):
-    def __init__(self, mongo_client: AsyncIOMotorClient, db_name: str, collection_name: str):
+    def __init__(
+        self, mongo_client: AsyncIOMotorClient, db_name: str, collection_name: str
+    ):
         self.client = mongo_client
         self.db_name = db_name
         self.collection_name = collection_name
@@ -39,7 +41,9 @@ class MongoCitizensDao(AbstractCitizensDao):
         )
         return citizen
 
-    async def patch_citizen(self, new_citizen_fields: OptionalCitizen, import_id: str, citizen_id: int) -> Citizen:
+    async def patch_citizen(
+        self, new_citizen_fields: OptionalCitizen, import_id: str, citizen_id: int
+    ) -> Citizen:
         citizen = await self.find_citizen(import_id, citizen_id)
 
         if not citizen:
@@ -62,7 +66,9 @@ class MongoCitizensDao(AbstractCitizensDao):
                         session,
                     )
 
-                return await self.client[self.db_name][self.collection_name].find_one_and_update(
+                return await self.client[self.db_name][
+                    self.collection_name
+                ].find_one_and_update(
                     {"import_id": import_id, "citizen_id": citizen_id},
                     {"$set": new_citizen_fields},
                     {"_id": 0, "import_id": 0},
@@ -72,22 +78,26 @@ class MongoCitizensDao(AbstractCitizensDao):
 
     async def get_presents_stat(self, import_id: str) -> Dict[str, Any]:
         aggregation = PresentsAggregation(import_id)
-        cursor = self.client[self.db_name][self.collection_name].aggregate(aggregation.get())
+        cursor = self.client[self.db_name][self.collection_name].aggregate(
+            aggregation.get()
+        )
 
         return one([presents_stat async for presents_stat in cursor])
 
     async def get_percentile_stats(self, import_id: str) -> List[Dict[str, Any]]:
         aggregation = PercentileAggregation(PERCENTILES, import_id)
-        cursor = self.client[self.db_name][self.collection_name].aggregate(aggregation.get())
+        cursor = self.client[self.db_name][self.collection_name].aggregate(
+            aggregation.get()
+        )
         return [city_stat async for city_stat in cursor]
 
     async def _update_relatives(
-            self,
-            updated_relatives: Set[int],
-            current_relatives: Set[int],
-            import_id: str,
-            citizen_id: int,
-            session,
+        self,
+        updated_relatives: Set[int],
+        current_relatives: Set[int],
+        import_id: str,
+        citizen_id: int,
+        session,
     ):
         new_relatives = (RelativeActions.PUSH, updated_relatives - current_relatives)
         outdated_relatives = (

@@ -11,7 +11,7 @@
                         "in": "body",
                         "name": "citizens",
                         "schema": {
-                            "properties": {
+                            "items": {
                                 "properties": {
                                     "apartment": {
                                         "type": "integer"
@@ -33,10 +33,7 @@
                                     },
                                     "relatives": {
                                         "items": {
-                                            "items": {
-                                                "type": "integer"
-                                            },
-                                            "type": "array"
+                                            "type": "integer"
                                         },
                                         "type": "array"
                                     },
@@ -49,7 +46,7 @@
                                 },
                                 "type": "object"
                             },
-                            "type": "object"
+                            "type": "array"
                         }
                     }
                 ],
@@ -62,7 +59,7 @@
                     }
                 },
                 "tags": [
-                    "import_citizens_handler_dto"
+                    "import_citizens_handler"
                 ]
             }
         },
@@ -85,7 +82,7 @@
                     }
                 },
                 "tags": [
-                    "citizens_handler_dto"
+                    "citizens_handler"
                 ]
             }
         },
@@ -108,7 +105,7 @@
                     }
                 },
                 "tags": [
-                    "citizens_presents_handler_dto"
+                    "citizens_presents_handler"
                 ]
             }
         },
@@ -137,10 +134,7 @@
                                 },
                                 "relatives": {
                                     "items": {
-                                        "items": {
-                                            "type": "integer"
-                                        },
-                                        "type": "array"
+                                        "type": "integer"
                                     },
                                     "type": "array"
                                 },
@@ -176,7 +170,7 @@
                     }
                 },
                 "tags": [
-                    "citizen_handler_dto"
+                    "citizen_handler"
                 ]
             }
         },
@@ -199,7 +193,7 @@
                     }
                 },
                 "tags": [
-                    "percentile_age_stat_handler_dto"
+                    "percentile_age_stat_handler"
                 ]
             }
         }
