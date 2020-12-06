@@ -12,6 +12,7 @@ def get_config():
     return {
         APP: {
             APP.name: "citizens_dwh_api",
+            APP.version: "0.1.1",
             APP.handlers_path: Path(__file__).parent / "handlers",
         },
         CLIENTS: {
